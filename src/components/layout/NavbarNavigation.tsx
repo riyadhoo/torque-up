@@ -14,7 +14,7 @@ export function NavbarNavigation() {
     { path: "/", label: t('nav.home') },
     { path: "/parts", label: t('nav.parts') },
     { path: "/cars", label: t('nav.cars') },
-    { path: "/chat", label: t('chat.aiAssistant') },
+    { path: "/chat", label: t('chat.chat') },
     { path: "/contact", label: "Contact" },
   ];
 
