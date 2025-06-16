@@ -45,7 +45,7 @@ const Hero = () => {
           <div className="flex justify-center lg:justify-end">
             <div className="relative">
               <img 
-                src="/lovable-uploads/c2a66d83-4665-4553-adcb-46317ab38ac2.png" 
+                src="/uploads/c2a66d83-4665-4553-adcb-46317ab38ac2.png" 
                 alt="Automotive service illustration with car, mechanic, and parts" 
                 className="w-full max-w-md h-auto"
               />
