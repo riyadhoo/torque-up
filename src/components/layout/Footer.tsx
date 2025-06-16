@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram, Mail, Phone } from "lucide-react";
-
 const Footer = () => {
-  return (
-    <footer className="bg-automotive-gray dark:bg-automotive-darkBlue text-white">
+  return <footer className="bg-automotive-gray dark:bg-automotive-darkBlue text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
@@ -39,8 +37,8 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact Us</Link></li>
               <li><Link to="/faq" className="text-gray-300 hover:text-white transition-colors">FAQ</Link></li>
-              <li><Link to="/shipping" className="text-gray-300 hover:text-white transition-colors">Shipping Info</Link></li>
-              <li><Link to="/returns" className="text-gray-300 hover:text-white transition-colors">Returns Policy</Link></li>
+              
+              
             </ul>
           </div>
           
@@ -67,8 +65,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
