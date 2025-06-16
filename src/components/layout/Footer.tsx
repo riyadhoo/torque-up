@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center mb-4">
-              <img src="/lovable-uploads/ba58edb5-dff5-4ea5-bd20-8b0c24778236.png" alt="CarWhisperer Market Logo" className="h-18 w-18 mr-2" />
+              <img src="/uploads/ba58edb5-dff5-4ea5-bd20-8b0c24778236.png" alt="torqueup Logo" className="h-18 w-18 mr-2" />
             </div>
             <p className="text-gray-300 mb-4">Your trusted marketplace for quality automotive parts and vehicles.</p>
             <div className="flex space-x-4">
