@@ -19,7 +19,7 @@ export const ContactInfo = () => {
             <div>
               <h3 className="font-semibold">Email</h3>
               <p className="text-muted-foreground" title="torqueup.contact@gmail.com">
-                {obfuscateEmail('torqueup.contact@gmail.com')}
+                {('torqueup.contact@gmail.com')}
               </p>
               <p className="text-sm text-muted-foreground">We'll respond within 24 hours</p>
             </div>
