@@ -43,37 +43,37 @@ const Categories = () => {
     {
       title: "Renault",
       description: "Explore parts and vehicles from the French automotive brand",
-      icon: "/lovable-uploads/e6e2ff38-e472-4c1b-9ea2-3dc7174c3845.png",
+      icon: "/uploads/e6e2ff38-e472-4c1b-9ea2-3dc7174c3845.png",
       route: "/cars?make=renault"
     },
     {
       title: "Dacia",
       description: "Affordable and reliable Romanian vehicles and parts",
-      icon: "/lovable-uploads/94b1cb4b-045a-4946-a5d1-6c23cca50433.png",
+      icon: "/uploads/94b1cb4b-045a-4946-a5d1-6c23cca50433.png",
       route: "/cars?make=dacia"
     },
     {
       title: "Chery",
       description: "Chinese automotive innovation and quality parts",
-      icon: "/lovable-uploads/3537a6c5-d41b-451b-80b9-049ae1142a3b.png",
+      icon: "/uploads/3537a6c5-d41b-451b-80b9-049ae1142a3b.png",
       route: "/cars?make=chery"
     },
     {
       title: "Chevrolet",
       description: "American muscle and performance vehicle components",
-      icon: "/lovable-uploads/f34c3029-87bf-4849-9773-1aac5abe0681.png",
+      icon: "/uploads/f34c3029-87bf-4849-9773-1aac5abe0681.png",
       route: "/cars?make=chevrolet"
     },
     {
       title: "Hyundai",
       description: "Korean engineering excellence in vehicles and parts",
-      icon: "/lovable-uploads/f7e2eba6-49a4-4019-879b-1b3a94bbaccf.png",
+      icon: "/uploads/f7e2eba6-49a4-4019-879b-1b3a94bbaccf.png",
       route: "/cars?make=hyundai"
     },
     {
       title: "Peugeot",
       description: "French elegance and automotive sophistication",
-      icon: "/lovable-uploads/37155994-34e7-42ba-a12e-829503418f1d.png",
+      icon: "/uploads/37155994-34e7-42ba-a12e-829503418f1d.png",
       route: "/cars?make=peugeot"
     }
   ];
