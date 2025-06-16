@@ -4,8 +4,8 @@ export const getImageUrl = (imagePath: string | null, fallbackUrl?: string): str
     return fallbackUrl || '/placeholder.svg';
   }
   
-  // Handle Lovable uploads
-  if (imagePath.startsWith('/lovable-uploads/')) {
+  // Handle uploads
+  if (imagePath.startsWith('/uploads/')) {
     return imagePath;
   }
   
