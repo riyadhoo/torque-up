@@ -1,14 +1,10 @@
-
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
 const obfuscateEmail = (email: string) => {
   return email.replace('@', ' [at] ').replace('.', ' [dot] ');
 };
-
 export const ContactInfo = () => {
-  return (
-    <div className="space-y-8">
+  return <div className="space-y-8">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Get in Touch</CardTitle>
@@ -19,7 +15,7 @@ export const ContactInfo = () => {
             <div>
               <h3 className="font-semibold">Email</h3>
               <p className="text-muted-foreground" title="torqueupcontact@gmailcom">
-                {('torqueup.contact@gmail.com')}
+                {'torqueup.contact@gmail.com'}
               </p>
               <p className="text-sm text-muted-foreground">We'll respond within 24 hours</p>
             </div>
@@ -62,8 +58,8 @@ export const ContactInfo = () => {
             <p className="text-sm text-muted-foreground">Our team of automotive experts is here to help you find the right parts</p>
           </div>
           <div>
-            <h4 className="font-semibold">Fast Delivery</h4>
-            <p className="text-sm text-muted-foreground">Quick and reliable delivery across Algeria</p>
+            
+            
           </div>
           <div>
             <h4 className="font-semibold">Competitive Prices</h4>
@@ -71,6 +67,5 @@ export const ContactInfo = () => {
           </div>
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>;
 };
