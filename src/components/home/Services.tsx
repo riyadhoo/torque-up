@@ -89,8 +89,9 @@ const Services = () => {
             <div className="grid md:grid-cols-3 gap-6 text-sm">
               <div className="flex items-center justify-center">
                 <Star className="h-5 w-5 mr-3 text-automotive-red" />
-                <span>Cars ratings</span><br></br>
-                <p>helpfull insights and informations about diffrent cars and ratings from previous owners of cars or experts</p>
+                <span>Cars ratings</span>
+              
+                <p><br></br>helpfull insights and informations about diffrent cars and ratings from previous owners of cars or experts</p>
               </div>
               <div className="flex items-center justify-center">
                 <ShoppingCart className="h-5 w-5 mr-3 text-automotive-red" />
