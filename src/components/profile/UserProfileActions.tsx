@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Star } from "lucide-react";
+import { MessageCircle, Star, LogIn } from "lucide-react";
 
 interface UserProfileActionsProps {
   isOwnProfile: boolean;

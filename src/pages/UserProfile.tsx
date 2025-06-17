@@ -24,7 +24,8 @@ export default function UserProfile() {
     avatarUrl,
     existingRating,
     userStats,
-    refreshRatingData
+    refreshRatingData,
+    isAuthenticated
   } = useUserProfile();
 
   const handleRatingSubmitted = () => {
@@ -33,11 +34,19 @@ export default function UserProfile() {
   };
 
   const handleSendMessage = () => {
+    if (!isAuthenticated) {
+      navigate("/login");
+      return;
+    }
     if (!userId) return;
     navigate(`/messages?user=${userId}`);
   };
 
   const handleToggleRatingForm = () => {
+    if (!isAuthenticated) {
+      navigate("/login");
+      return;
+    }
     setShowRatingForm(!showRatingForm);
   };
 
@@ -71,7 +80,7 @@ export default function UserProfile() {
     );
   }
 
-  const isOwnProfile = user?.id === userId;
+  const isOwnProfile = isAuthenticated && user?.id === userId;
   const isStoreProfile = profile?.user_type === 'store';
 
   // If viewing a store profile, show the store view
@@ -101,7 +110,7 @@ export default function UserProfile() {
           </CardContent>
         </Card>
 
-        {!isOwnProfile && showRatingForm && (
+        {!isOwnProfile && isAuthenticated && showRatingForm && (
           <div className="mb-8">
             <UserRatingForm
               ratedUserId={userId!}

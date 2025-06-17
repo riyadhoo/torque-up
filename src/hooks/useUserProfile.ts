@@ -36,18 +36,15 @@ export function useUserProfile() {
   const [userStats, setUserStats] = useState<any>(null);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-      return;
-    }
-
     if (!userId) {
       navigate("/");
       return;
     }
 
     fetchUserProfile();
-    fetchUserRating();
+    if (isAuthenticated) {
+      fetchUserRating();
+    }
     fetchUserStats();
   }, [userId, isAuthenticated, navigate]);
 
@@ -176,7 +173,9 @@ export function useUserProfile() {
   };
 
   const refreshRatingData = () => {
-    fetchUserRating();
+    if (isAuthenticated) {
+      fetchUserRating();
+    }
     fetchUserStats();
   };
 
@@ -189,6 +188,7 @@ export function useUserProfile() {
     avatarUrl,
     existingRating,
     userStats,
-    refreshRatingData
+    refreshRatingData,
+    isAuthenticated
   };
 }
