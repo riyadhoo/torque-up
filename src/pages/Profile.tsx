@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
@@ -39,75 +40,80 @@ export default function ProfilePage() {
   }, [isAuthenticated, loading, navigate]);
 
   // Fetch user profile and listings
-  useEffect(() => {
-    async function fetchUserData() {
-      if (!user?.id) return;
+  const fetchUserData = async () => {
+    if (!user?.id) return;
+    
+    try {
+      setIsLoading(true);
       
-      try {
-        setIsLoading(true);
+      // Fetch user profile to determine user type
+      const { data: profileData, error: profileError } = await supabase
+        .from("profiles")
+        .select("user_type")
+        .eq("id", user.id)
+        .single();
         
-        // Fetch user profile to determine user type
-        const { data: profileData, error: profileError } = await supabase
-          .from("profiles")
-          .select("user_type")
-          .eq("id", user.id)
-          .single();
-          
-        if (profileError && profileError.code !== 'PGRST116') {
-          console.error("Error fetching user profile:", profileError);
-        } else {
-          setUserProfile(profileData);
-        }
-        
-        // Fetch user listings with approval status (all statuses for user's own view)
-        const { data: listingsData, error: listingsError } = await supabase
-          .from("parts")
-          .select("*")
-          .eq("seller_id", user.id)
-          .order("created_at", { ascending: false });
-          
-        if (listingsError) {
-          console.error("Error fetching listings:", listingsError);
-          return;
-        }
-        
-        if (listingsData) {
-          // Convert image_url paths to public URLs
-          const enhancedListings = listingsData.map(listing => {
-            let publicImageUrl = listing.image_url;
-            
-            // If the image_url exists and appears to be a storage path rather than full URL
-            if (listing.image_url && !listing.image_url.startsWith('http')) {
-              try {
-                const { data: urlData } = supabase.storage
-                  .from("parts")
-                  .getPublicUrl(listing.image_url);
-                  
-                if (urlData) {
-                  publicImageUrl = urlData.publicUrl;
-                }
-              } catch (err) {
-                console.error(`Error getting URL for image ${listing.image_url}:`, err);
-              }
-            }
-            
-            return {
-              ...listing,
-              image_url: publicImageUrl
-            };
-          });
-          
-          setListings(enhancedListings);
-        }
-      } finally {
-        setIsLoading(false);
+      if (profileError && profileError.code !== 'PGRST116') {
+        console.error("Error fetching user profile:", profileError);
+      } else {
+        setUserProfile(profileData);
       }
+      
+      // Fetch user listings with approval status (all statuses for user's own view)
+      const { data: listingsData, error: listingsError } = await supabase
+        .from("parts")
+        .select("*")
+        .eq("seller_id", user.id)
+        .order("created_at", { ascending: false });
+        
+      if (listingsError) {
+        console.error("Error fetching listings:", listingsError);
+        return;
+      }
+      
+      if (listingsData) {
+        // Convert image_url paths to public URLs
+        const enhancedListings = listingsData.map(listing => {
+          let publicImageUrl = listing.image_url;
+          
+          // If the image_url exists and appears to be a storage path rather than full URL
+          if (listing.image_url && !listing.image_url.startsWith('http')) {
+            try {
+              const { data: urlData } = supabase.storage
+                .from("parts")
+                .getPublicUrl(listing.image_url);
+                
+              if (urlData) {
+                publicImageUrl = urlData.publicUrl;
+              }
+            } catch (err) {
+              console.error(`Error getting URL for image ${listing.image_url}:`, err);
+            }
+          }
+          
+          return {
+            ...listing,
+            image_url: publicImageUrl
+          };
+        });
+        
+        setListings(enhancedListings);
+      }
+    } finally {
+      setIsLoading(false);
     }
+  };
 
+  useEffect(() => {
     if (user?.id) {
       fetchUserData();
     }
   }, [user]);
+
+  const handleListingDeleted = () => {
+    // Refresh the listings after deletion
+    fetchUserData();
+  };
 
   // Show loading state while checking authentication or loading profile
   if (loading || isLoading) {
@@ -148,7 +154,8 @@ export default function ProfilePage() {
               <UserListings 
                 listings={listings} 
                 showAddButton={true} 
-                showStatus={true} 
+                showStatus={true}
+                onListingDeleted={handleListingDeleted}
               />
             )}
           </TabsContent>
