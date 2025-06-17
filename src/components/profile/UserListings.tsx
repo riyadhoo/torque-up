@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "@/components/ui/context-menu";
-import { Plus, Edit, Trash2, MoreVertical } from "lucide-react";
+import { Plus, Edit, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import {
@@ -117,70 +116,60 @@ export function UserListings({ listings, showAddButton = false, showStatus = fal
           {listings.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {listings.map((listing) => (
-                <div key={listing.id} className="relative">
-                  <ContextMenu>
-                    <ContextMenuTrigger>
-                      <Card className="overflow-hidden cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate(`/parts/${listing.id}`)}>
-                        <div className="aspect-video relative overflow-hidden">
-                          {listing.image_url ? (
-                            <img 
-                              src={listing.image_url} 
-                              alt={listing.title} 
-                              className="w-full h-full object-cover" 
-                            />
-                          ) : (
-                            <div className="w-full h-full bg-muted flex items-center justify-center">
-                              <p className="text-muted-foreground">No image</p>
-                            </div>
-                          )}
-                          <div className="absolute top-2 left-2">
-                            <Badge variant="secondary">{listing.condition}</Badge>
-                          </div>
-                          {showStatus && listing.approval_status && (
-                            <div className="absolute top-2 right-2">
-                              <Badge className={getStatusColor(listing.approval_status)}>
-                                {listing.approval_status}
-                              </Badge>
-                            </div>
-                          )}
-                          <div className="absolute top-2 right-2">
-                            <Button
-                              variant="secondary"
-                              size="sm"
-                              className="h-8 w-8 p-0 bg-white/80 hover:bg-white"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                              }}
-                            >
-                              <MoreVertical className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </div>
-                        
-                        <CardContent className="p-4">
-                          <h3 className="font-medium text-lg mb-1">{listing.title}</h3>
-                          <p className="text-2xl font-bold mb-2">{listing.price.toFixed(2)} Da</p>
-                          <div className="text-xs text-muted-foreground">
-                            Listed on {new Date(listing.created_at).toLocaleDateString()}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </ContextMenuTrigger>
-                    <ContextMenuContent>
-                      <ContextMenuItem onClick={(e) => handleEdit(listing.id, e)}>
-                        <Edit className="mr-2 h-4 w-4" />
-                        Edit
-                      </ContextMenuItem>
-                      <ContextMenuItem 
-                        onClick={(e) => handleDeleteClick(listing.id, e)}
-                        className="text-red-600 focus:text-red-600"
+                <Card key={listing.id} className="overflow-hidden hover:shadow-lg transition-shadow relative group">
+                  <div className="aspect-video relative overflow-hidden cursor-pointer" onClick={() => navigate(`/parts/${listing.id}`)}>
+                    {listing.image_url ? (
+                      <img 
+                        src={listing.image_url} 
+                        alt={listing.title} 
+                        className="w-full h-full object-cover" 
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-muted flex items-center justify-center">
+                        <p className="text-muted-foreground">No image</p>
+                      </div>
+                    )}
+                    <div className="absolute top-2 left-2">
+                      <Badge variant="secondary">{listing.condition}</Badge>
+                    </div>
+                    {showStatus && listing.approval_status && (
+                      <div className="absolute top-2 right-2">
+                        <Badge className={getStatusColor(listing.approval_status)}>
+                          {listing.approval_status}
+                        </Badge>
+                      </div>
+                    )}
+                  </div>
+                  
+                  <CardContent className="p-4">
+                    <h3 className="font-medium text-lg mb-1 cursor-pointer" onClick={() => navigate(`/parts/${listing.id}`)}>{listing.title}</h3>
+                    <p className="text-2xl font-bold mb-2">{listing.price.toFixed(2)} Da</p>
+                    <div className="text-xs text-muted-foreground mb-3">
+                      Listed on {new Date(listing.created_at).toLocaleDateString()}
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={(e) => handleEdit(listing.id, e)}
+                        className="flex items-center gap-1 flex-1"
                       >
-                        <Trash2 className="mr-2 h-4 w-4" />
+                        <Edit className="h-4 w-4" />
+                        Edit
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={(e) => handleDeleteClick(listing.id, e)}
+                        className="flex items-center gap-1 flex-1 text-red-600 hover:text-red-700 hover:bg-red-50"
+                      >
+                        <Trash2 className="h-4 w-4" />
                         Delete
-                      </ContextMenuItem>
-                    </ContextMenuContent>
-                  </ContextMenu>
-                </div>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           ) : (
